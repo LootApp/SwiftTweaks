@@ -44,7 +44,7 @@ platform :ios do
         raise "No binary found to upload #{framework_binary}" if File.file?(framework_binary) == false
 
         git_add
-        git_commit(message: "New release version bump")
+        git_commit(path: ".", message: "New release version bump")
 
         # Create release tag
         push_to_git_remote
