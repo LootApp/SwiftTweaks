@@ -45,7 +45,8 @@ platform :ios do
         
         # Increment version
         increment_version_number(version_number: target_version)  
-        git_commit_all(message: "Bump version to #{target_version}")
+        Action.sh "git add -A"
+        Actions.sh "git commit -am \"New release version bump\""
         
         # Create Carthage framework
         Actions.sh("cd.. && carthage build --no-skip-current && carthage archive #{FRAMEWORK_NAME}")
