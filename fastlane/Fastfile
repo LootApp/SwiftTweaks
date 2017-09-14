@@ -21,11 +21,10 @@ fastlane_version "1.38.0"
 
 default_platform :ios
 
-class Config
-    SLACK_URL = "https://hooks.slack.com/services/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".freeze
-    FRAMEWORK_NAME = "SwiftTweaks".freeze
-    REPOSITORY_NAME = "SwiftTweaks".freeze
-end
+
+SLACK_URL = "https://hooks.slack.com/services/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".freeze
+FRAMEWORK_NAME = "SwiftTweaks".freeze
+REPOSITORY_NAME = "SwiftTweaks".freeze
 
 platform :ios do
     desc "Release new version"
@@ -38,20 +37,21 @@ platform :ios do
         
         # Increment version
         increment_version_number(version_number: target_version)  
-        Action.sh "git add -A"
-        Actions.sh "git commit -am \"New release version bump\""
         
         # Create Carthage framework
-        Actions.sh("cd.. && carthage build --no-skip-current && carthage archive #{Config.FRAMEWORK_NAME}")
-        framework_binary = File.join(File.expand_path('../..', __FILE__),"#{Config.FRAMEWORK_NAME}.framework.zip")
-        raise "No binary found to upload" if File.file?(framework_binary)
+        Actions.sh("cd .. && carthage build --no-skip-current && carthage archive #{FRAMEWORK_NAME}")
+        framework_binary = File.join(File.expand_path('../..', __FILE__),"#{FRAMEWORK_NAME}.framework.zip")
+        raise "No binary found to upload #{framework_binary}" if File.file?(framework_binary) == false
+
+        Action.sh "git add -A"
+        Actions.sh "git commit -am \"New release version bump\""
 
         # Create release tag
         Actions.sh("git tag -s #{target_version} -m ''")
         push_to_git_remote
         
         set_github_release(
-            repository_name: "LootApp/#{Config.REPOSITORY_NAME}",
+            repository_name: "LootApp/#{REPOSITORY_NAME}",
             api_token: "8ae92e07a31a1409527918e6d88168f44c855e17",
             tag_name: target_version,
             upload_assets: framework_binary.to_s
