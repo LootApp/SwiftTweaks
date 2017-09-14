@@ -47,7 +47,6 @@ platform :ios do
         Actions.sh "git commit -am \"New release version bump\""
 
         # Create release tag
-        Actions.sh("git tag -s #{target_version} -m ''")
         push_to_git_remote
         
         set_github_release(
