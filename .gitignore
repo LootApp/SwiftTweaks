@@ -18,3 +18,5 @@ DerivedData
 *.ipa
 *.xcuserstate
 
+*.framework.zip
+fastlane/report.xml
