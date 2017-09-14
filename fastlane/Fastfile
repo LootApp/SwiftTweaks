@@ -53,7 +53,9 @@ platform :ios do
             repository_name: "LootApp/#{REPOSITORY_NAME}",
             api_token: ENV['GITHUB_API_TOKEN'],
             tag_name: target_version,
-            upload_assets: [ framework_binary ]
+            upload_assets: [ framework_binary ],
+            name: "",
+            description: ""
         )
     end
 
