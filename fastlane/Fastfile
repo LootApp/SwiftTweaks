@@ -51,7 +51,7 @@ platform :ios do
         
         set_github_release(
             repository_name: "LootApp/#{REPOSITORY_NAME}",
-            api_token: "8067da99d82cf8ee4ffdd07530eb993456b72d0b",
+            api_token: "22027ef757b4f09a3d7e963a438a1ef296efdfeb",
             tag_name: target_version,
             upload_assets: [ framework_binary ]
         )
