@@ -53,7 +53,7 @@ platform :ios do
             repository_name: "LootApp/#{REPOSITORY_NAME}",
             api_token: "8ae92e07a31a1409527918e6d88168f44c855e17",
             tag_name: target_version,
-            upload_assets: framework_binary
+            upload_assets: [ framework_binary ]
         )
     end
 
